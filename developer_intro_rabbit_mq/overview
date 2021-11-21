@@ -1,0 +1,36 @@
+Rabbitmq:
+    This is a message broker that implements different protocols. One of the protocol is AMQP(advance message queuing protocol) 
+    AMQP was design to exchange messsage using producer, boker and a consumer. This
+    producer: produces messages 
+    cosumer: consumes messages 
+    broker: The medium of excahnge between the producer and the consumer. This
+
+    The broker components(3): 
+        The broker has three components
+            1. exchange: receives messages from the producer and send to the consumer
+            2. queue: a data structure in disc or memory that store messages 
+            3. Binding: The connection between an exchange and a queue.
+
+        Different exchange types:
+        1. direct: an exchange of this type sends a message to the queue where the routing key equals the binding key
+        2. topic: an excahange of this type sends a message to  the queue where the routing key partial matches the binding key.
+                example:
+                    i. 'order.*' : sends message to a queue whose routing key starts with 'order'
+                    ii. '.*order' : sends message to a queue whose routing key ends with 'order'
+
+        3. fanout: an exchange that sends messages to all queue it is connected to regardles of the binding key or the routing key.
+            every queue receives the messages.
+
+        4. Headers: Allows  you to route messages based on header values instead of the routing keys.
+        
+    note: 
+        Rabbitmq has a nameless exchange by default
+        pika: a rabbitmq client library for python
+
+    code: 
+        The session runs rabbitmq in a docker environment
+        - docker run -d --hostname my-rabbit --name some-rabbit rabbitmq:3
+        - docker run --rm -it --hostname my-rabbit -p 15672:15672 -p 5672:5672  rabbitmq:3-management
+            
+
+
